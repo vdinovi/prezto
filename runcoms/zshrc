@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #
 # Executes commands at the start of an interactive session.
 #
@@ -11,3 +18,26 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# Disable annoying correction prompts
+unsetopt correct
+unsetopt correctall
+DISABLE_CORRECTION="true"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# [xdg](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+export PATH="/Users/vdinovi/.local/bin:$PATH"
+
+# [asdf] (https://github.com/asdf-vm/asdf)
+. "$ASDF_DIR/asdf.sh"
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit && compinit
+
+# [Go]
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export ASDF_GOPATH="${$(dirname $(dirname $(asdf which go)))}"
+export MY_GOPATH=$HOME/go
+export GOPATH=$ASDF_GOPATH:$MY_GOPATH
+export GOBIN=$ASDF_GOPATH/bin:$MY_GOPATH/bin

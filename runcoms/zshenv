@@ -9,3 +9,20 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# [xdg](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# [asdf](https://github.com/asdf-vm/asdf)
+export ASDF_DIR="$HOME/.asdf"
+
+# [Go]
+export GOPATH=$HOME/go
+
+# [Autocorrect]
+unsetopt correct
+unsetopt correctall
+
